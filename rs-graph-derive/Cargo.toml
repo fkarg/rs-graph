@@ -1,0 +1,21 @@
+[package]
+name = "rs-graph-derive"
+version = "0.21.0-dev"
+edition = "2018"
+authors = ["Frank Fischer <frank-fischer@shadow-soft.de>"]
+description = "Automatic implementation of graph types"
+license = "GPL-3.0+"
+homepage = "https://chiselapp.com/user/fifr/repository/rs-graph"
+repository = "https://chiselapp.com/user/fifr/repository/rs-graph"
+keywords = ["algorithm", "optimization", "network", "graph", "combinatorics"]
+categories = ["algorithms"]
+
+[lib]
+name = "rs_graph_derive"
+proc-macro = true
+
+[dependencies]
+rs-graph = { path="..", version="^0.21.0-dev" }
+quote = "^1"
+syn = "^1"
+proc-macro2 = "^1"

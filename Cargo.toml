@@ -1,0 +1,74 @@
+[package]
+name = "rs-graph"
+version = "0.21.0-dev"
+edition = "2018"
+authors = ["Frank Fischer <frank-fischer@shadow-soft.de>"]
+description = "A library for graph algorithms and combinatorial optimization"
+license = "GPL-3.0+"
+homepage = "https://chiselapp.com/user/fifr/repository/rs-graph"
+repository = "https://chiselapp.com/user/fifr/repository/rs-graph"
+keywords = ["algorithm", "optimization", "network", "graph", "combinatorics"]
+categories = ["algorithms"]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = [ "--html-in-header", "src/mathjax.txt" ]
+
+[features]
+default = []
+dimacs = []
+mps = []
+steinlib = ["peg"]
+serialize = ["serde", "serde_derive"]
+
+[dependencies]
+either = "^1.5"
+num-traits = "^0.2"
+num-iter = "^0.1.33"
+num-integer = "^0.1.44"
+peg = { version = "^0.8", optional = true }
+serde = { version = "^1.0", optional = true }
+serde_derive = { version = "^1.0", optional = true }
+
+[profile.release]
+debug = 2
+opt-level = 3
+lto = true
+codegen-units = 1
+
+[dev-dependencies]
+rustop = "^1.0.4"
+serde_json = "^1.0"
+time = "^0.3"
+ordered-float = "^2.0.1"
+zopen = { version = "^0.3.4", features = ["bzip2", "flate2", "rust-lzma"]}
+
+[[example]]
+name = "dinic"
+required-features = ["dimacs"]
+
+[[example]]
+name = "edmondskarp"
+required-features = ["dimacs"]
+
+[[example]]
+name = "pushrelabel"
+required-features = ["dimacs"]
+
+[[example]]
+name = "netsimplex"
+required-features = ["dimacs"]
+
+[[example]]
+name = "mps2dimacs"
+required-features = ["dimacs", "mps"]
+
+[[test]]
+name = "maxflow"
+path = "tests/maxflow.rs"
+required-features = ["dimacs"]
+
+[[test]]
+name = "mcf"
+path = "tests/mcf.rs"
+required-features = ["dimacs"]
